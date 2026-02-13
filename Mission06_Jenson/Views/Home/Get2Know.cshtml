@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Get to Know Joel Hilton";
+}
+@* introduction to the man himsel *@
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Get to Know Joel Hilton</h1>
+        <p class="lead">Comedian, Podcaster, and Film Enthusiast</p>
+    </div>
+@* creating a card for the quick wits comedy website *@
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-5">
+            <div class="card h-100 shadow-sm border-0 bg-light text-center p-4">
+                <div class="card-body">
+                    <h3 class="card-title h4 mb-3">Live Comedy</h3>
+                    <p class="card-text text-muted">Catch Joel performing regularly with the Quick Wits crew.</p>
+                    <a href="https://www.qwcomedy.com/" target="_blank" class="btn btn-outline-primary mt-2">
+                        Visit Quick Wits Comedy
+                    </a>
+                </div>
+            </div>
+        </div>
+@* doing the same for baconsale *@
+        <div class="col-md-5">
+            <div class="card h-100 shadow-sm border-0 text-center overflow-hidden">
+                <a href="https://baconsale.com/" target="_blank">
+                    <img src="~/images/baconsale.jpg" 
+                         alt="Baconsale Podcast" 
+                         class="card-img-top img-fluid" 
+                         style="max-height: 200px; object-fit: cover;">
+                </a>
+                <div class="card-body">
+                    <h3 class="card-title h4 mb-3">Baconsale Podcast</h3>
+                    <p class="card-text text-muted">Click the image or the button below to explore the podcast.</p>
+                    <a href="https://baconsale.com/" target="_blank" class="btn btn-primary">
+                        Go to Baconsale.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+﻿@model Mission06_Jenson.Models.Form
+
+@{
+    ViewData["Title"] = "Add a New Movie";
+}
+@* using the card to get our input to put into the database *@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0">
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h2 class="m-0">Add a New Movie</h2>
+                </div>
+                <div class="card-body p-4">
+                    @* here is our form *@
+                    <form method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+@* category input *@
+                        <div class="mb-3">
+                            <label asp-for="Category" class="form-label fw-bold"></label>
+                            <input asp-for="Category" class="form-control" placeholder="e.g. Comedy"/>
+                        </div>
+@* title input *@
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label fw-bold"></label>
+                            <input asp-for="Title" class="form-control"/>
+                        </div>
+@* year input *@
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Year" class="form-label fw-bold"></label>
+                                <input asp-for="Year" class="form-control"/>
+                            </div>
+                            @* rating input *@
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Rating" class="form-label fw-bold"></label>
+                                <select asp-for="Rating" class="form-select">
+                                    <option value="">Select a Rating</option>
+                                    <option value="G">G</option>
+                                    <option value="PG">PG</option>
+                                    <option value="PG-13">PG-13</option>
+                                    <option value="R">R</option>
+                                </select>
+                            </div>
+                        </div>
+@* director input *@
+                        <div class="mb-3">
+                            <label asp-for="Director" class="form-label fw-bold"></label>
+                            <input asp-for="Director" class="form-control"/>
+                        </div>
+@* edited yes/no input *@
+                        <div class="mb-3">
+                            <label class="form-label d-block fw-bold">Edited?</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" asp-for="Edited" value="true" id="editedYes">
+                                <label class="form-check-label" for="editedYes">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" asp-for="Edited" value="false" id="editedNo">
+                                <label class="form-check-label" for="editedNo">No</label>
+                            </div>
+                        </div>
+@* lent to input *@
+                        <div class="mb-3">
+                            <label asp-for="LentTo" class="form-label fw-bold">Lent To:</label>
+                            <input asp-for="LentTo" class="form-control" placeholder="Optional"/>
+                        </div>
+@* notes input *@
+                        <div class="mb-4">
+                            <label asp-for="Notes" class="form-label fw-bold"></label>
+                            <textarea asp-for="Notes" class="form-control" rows="2" maxlength="25"></textarea>
+                            <div class="form-text text-end">Max 25 characters</div>
+                        </div>
+@* submit button *@
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-dark btn-lg shadow-sm">Submit Movie</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

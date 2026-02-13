@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Success!";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center text-center">
+        <div class="col-md-6">
+            <div class="mb-4">
+                <div class="display-1 text-success">
+                    <i class="bi bi-check-circle-fill"></i> <span style="font-size: 100px;">✔</span> </div>
+            </div>
+@* text that says the movie has been added *@
+            <h2 class="fw-bold mb-3">Movie Added Successfully!</h2>
+            <p class="text-muted mb-5">
+                The Joel Hilton Film Collection has been updated. Thanks for contributing to the archive!
+            </p>
+@* click here to go back to the home *@
+            <div class="d-flex justify-content-center gap-3">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary px-4">
+                    Back to Home
+                </a>
+                @* click here to add another movie *@
+                <a asp-controller="Home" asp-action="MovieForm" class="btn btn-primary px-4 shadow-sm">
+                    Add Another Movie
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
