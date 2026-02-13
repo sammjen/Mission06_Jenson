@@ -33,8 +33,6 @@ public class HomeController : Controller
     {
         _context.Forms.Add(response);
         _context.SaveChanges();
-        
-        
         return View("Confirmation", response);
     }
 }
