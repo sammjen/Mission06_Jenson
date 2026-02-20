@@ -1,0 +1,43 @@
+@model Movie
+
+@{
+    ViewData["Title"] = "Delete Movie";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger shadow">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="m-0"><i class="bi bi-exclamation-triangle-fill"></i> Confirm Deletion</h3>
+                </div>
+                @*making sure the user understands they are about to delete something*@
+                <div class="card-body text-center p-4">
+                    <p class="lead">Are you sure you want to permanently delete:</p>
+                    <h2 class="display-6 fw-bold text-dark mb-4">"@Model.Title"</h2>
+                    
+                    <div class="alert alert-warning text-start">
+                        <strong>Warning:</strong> This action cannot be undone. All record data for this movie will be removed from the database.
+                    </div>
+
+                    <form method="post" class="mt-4">
+                        <input type="hidden" asp-for="MovieId" />
+
+                        <div class="d-flex justify-content-center gap-3">
+                            <button type="submit" class="btn btn-danger btn-lg px-5 shadow-sm">
+                                Delete Forever
+                            </button>
+                            @*goes back to the movielist form if they don't want to delete it*@
+                            <a asp-controller="Home" asp-action="MovieList" class="btn btn-outline-secondary btn-lg px-5">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted text-center small">
+                    Director: @Model.Director | Year: @Model.Year
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

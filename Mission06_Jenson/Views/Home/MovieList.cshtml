@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "See the Current List of Movies";
+}
+
+@*setting up our model to be a list for movie*@
+@model List<Movie>
+
+@*creating the table with our headers*@
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th>Category</th>
+        <th>Title</th>
+        <th>Director</th>
+        <th>Rating</th>
+        <th>Edited</th>
+        <th>Lent To</th>
+        <th>Plex?</th>
+        <th>Notes</th>
+        <th colspan="2" class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @*using razor code to iterate through each row*@
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@(x.Category?.CategoryName ?? x.CategoryId.ToString())</td>
+            <td>@x.Title</td>
+            <td>@x.Director</td>
+            <td>@x.Rating</td>
+            <td>@(x.Edited == true ? "Yes" : "No")</td>
+            <td>@x.LentTo</td>
+            <td>@(x.CopiedToPlex ? "Yes" : "No")</td>
+            <td>@x.Notes</td>
+            <td class="text-center">
+                <a class="btn btn-info btn-sm" asp-controller="Home" asp-action="Edit" asp-route-id="@x.MovieId">Edit</a>
+            </td>
+            <td class="text-center">
+                <a class="btn btn-danger btn-sm" asp-controller="Home" asp-action="Delete" asp-route-id="@x.MovieId">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

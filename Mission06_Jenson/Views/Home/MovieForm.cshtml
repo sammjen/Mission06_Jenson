@@ -1,41 +1,51 @@
-﻿@model Mission06_Jenson.Models.Form
+﻿@model Mission06_Jenson.Models.Movie
 
 @{
     ViewData["Title"] = "Add a New Movie";
 }
-@* using the card to get our input to put into the database *@
-<div class="container mt-5">
+
+<div class="container mt-5 mb-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-8 col-lg-6"> @* Adjusted width for better responsiveness *@
             <div class="card shadow border-0">
                 <div class="card-header bg-dark text-white text-center py-3">
-                    <h2 class="m-0">Add a New Movie</h2>
+                    <h2 class="m-0">@ViewData["Title"]</h2>
                 </div>
                 <div class="card-body p-4">
-                    @* here is our form *@
                     <form method="post">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-@* category input *@
-                        <div class="mb-3">
-                            <label asp-for="Category" class="form-label fw-bold"></label>
-                            <input asp-for="Category" class="form-control" placeholder="e.g. Comedy"/>
+                        <input type="hidden" asp-for="MovieId" />
+                        
+                        @* Validation Summary at the top *@
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                        @* Row 1: Category & Title *@
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="CategoryId" class="form-label fw-bold">Category</label>
+                                <select asp-for="CategoryId" class="form-select" required> @* Added Bootstrap class *@
+                                    <option value="">Select Category</option>
+                                    @foreach (Category c in ViewBag.Categories)
+                                    {
+                                        <option value="@c.CategoryId">@c.CategoryName</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Title" class="form-label fw-bold"></label>
+                                <input asp-for="Title" class="form-control" placeholder="Movie Title" required/>
+                            </div>
                         </div>
-@* title input *@
-                        <div class="mb-3">
-                            <label asp-for="Title" class="form-label fw-bold"></label>
-                            <input asp-for="Title" class="form-control"/>
-                        </div>
-@* year input *@
+
+                        @* Row 2: Year & Rating *@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label asp-for="Year" class="form-label fw-bold"></label>
-                                <input asp-for="Year" class="form-control"/>
+                                <input asp-for="Year" class="form-control" type="number" min="1888" placeholder="YYYY"/>
                             </div>
-                            @* rating input *@
                             <div class="col-md-6 mb-3">
                                 <label asp-for="Rating" class="form-label fw-bold"></label>
-                                <select asp-for="Rating" class="form-select">
-                                    <option value="">Select a Rating</option>
+                                <select asp-for="Rating" class="form-select" required>
+                                    <option value="">Select Rating</option>
                                     <option value="G">G</option>
                                     <option value="PG">PG</option>
                                     <option value="PG-13">PG-13</option>
@@ -43,37 +53,54 @@
                                 </select>
                             </div>
                         </div>
-@* director input *@
+
+                        @* Director & Lent To *@
                         <div class="mb-3">
                             <label asp-for="Director" class="form-label fw-bold"></label>
-                            <input asp-for="Director" class="form-control"/>
+                            <input asp-for="Director" class="form-control" placeholder="Director Name"/>
                         </div>
-@* edited yes/no input *@
+
                         <div class="mb-3">
-                            <label class="form-label d-block fw-bold">Edited?</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" asp-for="Edited" value="true" id="editedYes">
-                                <label class="form-check-label" for="editedYes">Yes</label>
+                            <label asp-for="LentTo" class="form-label fw-bold">Lent To</label>
+                            <input asp-for="LentTo" class="form-control" placeholder="Optional: Who borrowed it?"/>
+                        </div>
+
+                        @* Radios: Edited & Copied to Plex *@
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label d-block fw-bold">Edited?</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="Edited" value="true" id="editedYes">
+                                    <label class="form-check-label" for="editedYes">Yes</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="Edited" value="false" id="editedNo">
+                                    <label class="form-check-label" for="editedNo">No</label>
+                                </div>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" asp-for="Edited" value="false" id="editedNo">
-                                <label class="form-check-label" for="editedNo">No</label>
+                            <div class="col-md-6">
+                                <label class="form-label d-block fw-bold">Copied to Plex?</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="CopiedToPlex" value="true" id="copiedYes">
+                                    <label class="form-check-label" for="copiedYes">Yes</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="CopiedToPlex" value="false" id="copiedNo">
+                                    <label class="form-check-label" for="copiedNo">No</label>
+                                </div>
                             </div>
                         </div>
-@* lent to input *@
-                        <div class="mb-3">
-                            <label asp-for="LentTo" class="form-label fw-bold">Lent To:</label>
-                            <input asp-for="LentTo" class="form-control" placeholder="Optional"/>
-                        </div>
-@* notes input *@
+
+                        @* Notes *@
                         <div class="mb-4">
                             <label asp-for="Notes" class="form-label fw-bold"></label>
-                            <textarea asp-for="Notes" class="form-control" rows="2" maxlength="25"></textarea>
+                            <textarea asp-for="Notes" class="form-control" rows="2" maxlength="25" placeholder="Additional notes..."></textarea>
                             <div class="form-text text-end">Max 25 characters</div>
                         </div>
-@* submit button *@
+
+                        @* Submit Button *@
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-dark btn-lg shadow-sm">Submit Movie</button>
+                            <button type="submit" class="btn btn-dark btn-lg shadow-sm">Save Movie Entry</button>
                         </div>
                     </form>
                 </div>
